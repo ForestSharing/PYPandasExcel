@@ -29,15 +29,27 @@ def main():
     frame2=pd.DataFrame(data, columns=["year", "state", "pop"])
     print(frame2)
 
-    print('frame year is \n ',frame['year'])
-    print('frame year is \n ',frame.year)
+    print('frame year is =======================================\n ',frame['year'])
+    print('frame year is =======================================\n ',frame.year)
 
-    print('frame the one row \n',frame.loc[1])
-    print('frame the one row \n',frame.iloc[1])
+    print('frame the one row ======================================= \n',frame.loc[1])
+    print('frame the one row ======================================= \n',frame.iloc[1])
 
-    print('frame the one columns  \n',frame['year'])
-    print('frame the one columns  \n',frame['year']==2001)
+    print('frame the one columns =======================================  \n',frame['year'])
+    print('frame the one columns ======================================= \n',frame['year']==2001)
+
+
+    opulations = {"Ohio": {2000: 1.5, 2001: 1.7, 2002: 3.6},
+                   "Nevada": {2001: 2.4, 2002: 2.9}}
+    frame3 = pd.DataFrame(opulations)
+    print('dictionary format dataframe is==========================================  \n',frame3)
     
+    # essential functionality  under ==============================
+
+    
+
+
+
 if __name__ == '__main__':
     main()
     
