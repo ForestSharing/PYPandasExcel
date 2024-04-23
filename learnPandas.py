@@ -30,14 +30,14 @@ def main():
     frame2=pd.DataFrame(data, columns=["year", "state", "pop"])
     print(frame2)
 
-    print('frame year is =======================================\n ',frame['year'])
-    print('frame year is =======================================\n ',frame.year)
+    print('frame year is =================================================\n ',frame['year'])
+    print('frame year is =================================================\n ',frame.year)
 
-    print('frame the one row ======================================= \n',frame.loc[1])
-    print('frame the one row ======================================= \n',frame.iloc[1])
+    print('frame the one row ============================================ \n',frame.loc[1])
+    print('frame the one row ============================================ \n',frame.iloc[1])
 
-    print('frame the one columns =======================================  \n',frame['year'])
-    print('frame the one columns ======================================= \n',frame['year']==2001)
+    print('frame the one columns ========================================  \n',frame['year'])
+    print('frame the one columns ======================================== \n',frame['year']==2001)
 
 
     opulations = {"Ohio": {2000: 1.5, 2001: 1.7, 2002: 3.6},
@@ -65,7 +65,7 @@ def main():
                                           dtype="Int64"),
                        "data1" : [10,20,30,40,50,60,70],
                        "data2" : [100,200,300,400,500,600,700]})
-    print('this is aggregation and group ===============')
+    print('==============================this is aggregation and group ===============')
     print(df)
 
     means = df['data1'].groupby([df['key1'],df['key2']]).mean()
@@ -78,7 +78,7 @@ def main():
     mytest2 = df.groupby(df['key1']).mean()
     print(mytest2)
 
-    print('==========for i,j in df.groupby(\'key1\'):========================')
+    print('==========for i,j in df.groupby(\'key1\'):=================================')
     for i,j in df.groupby('key1'):
         print(i)
         print(j)
@@ -103,6 +103,9 @@ def main():
 
     for k in test5.groupby(['key1','key2','key3']):
         print(k)
+
+
+    print('==================')
 
 if __name__ == '__main__':
     main()
