@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 def main():
@@ -44,11 +45,64 @@ def main():
     frame3 = pd.DataFrame(opulations)
     print('dictionary format dataframe is==========================================  \n',frame3)
     
-    # essential functionality  under ==============================
+    #   essential functionality  under ==============================
 
+
+    #   Data Aggregation and Group Operations==============================
+
+
+        #     key1  key2  data1  data2
+        # 0     a     1     10    100
+        # 1     a     2     20    200
+        # 2  None     1     30    300
+        # 3     b     2     40    400
+        # 4     b     1     50    500
+        # 5     a  <NA>     60    600
+        # 6  None     1     70    700
+
+    df = pd.DataFrame({"key1" : ["a", "a", None, "b", "b", "a", None],
+                       "key2" : pd.Series([1, 2, 1, 2, 1, None, 1],
+                                          dtype="Int64"),
+                       "data1" : [10,20,30,40,50,60,70],
+                       "data2" : [100,200,300,400,500,600,700]})
+    print('this is aggregation and group ===============')
+    print(df)
+
+    means = df['data1'].groupby([df['key1'],df['key2']]).mean()
+    print('=======================')
+    print(means)
+
+    mytest = df.groupby(([df['key1'],df['key2']])).mean()
+    print(mytest)
     
+    mytest2 = df.groupby(df['key1']).mean()
+    print(mytest2)
 
+    print('==========for i,j in df.groupby(\'key1\'):========================')
+    for i,j in df.groupby('key1'):
+        print(i)
+        print(j)
+    print('=============for(i,j),k in df.groupby([\'key1\',\'key2\']): ================')
+    for(i,j),k in df.groupby(['key1','key2']):
+        print((i,j))
+        print(k)
+    print('============test4==========')
+    test4 = df     
+    test4.loc[0,'data1']=20
+    print(test4)
+    for(i,j,m),k in test4.groupby(['key1','key2','data1']):
+        print((i,j,m))
+        print(k)
 
+    print('============test5===================')
+    test5 = pd.DataFrame({"key1" :['a','a','a','b','b','a'],
+                       "key2" : [1,1,2,1,2,1],
+                       'key3':[5,6,5,4,4,5],
+                       'key4':[30,40,50,60,70,80]})   
+    print(test5)
+
+    for k in test5.groupby(['key1','key2','key3']):
+        print(k)
 
 if __name__ == '__main__':
     main()
