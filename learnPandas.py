@@ -45,10 +45,10 @@ def main():
     frame3 = pd.DataFrame(opulations)
     print('dictionary format dataframe is==========================================  \n',frame3)
     
-    #   essential functionality  under ==============================
+    #   essential functionality  under ============================================
 
 
-    #   Data Aggregation and Group Operations==============================
+    #   Data Aggregation and Group Operations======================================
 
 
         #     key1  key2  data1  data2
@@ -94,7 +94,7 @@ def main():
         print((i,j,m))
         print(k)
 
-    print('============test5===================')
+    print('============================test5==========================================')
     test5 = pd.DataFrame({"key1" :['a','a','a','b','b','a'],
                        "key2" : [1,1,2,1,2,1],
                        'key3':[5,6,5,4,4,5],
@@ -105,7 +105,8 @@ def main():
         print(k)
 
 
-    print('==================')
+    print('=================Data Aggregation===========================================')
+
 
 if __name__ == '__main__':
     main()
