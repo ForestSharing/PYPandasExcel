@@ -96,17 +96,17 @@ def main():
 
     print('============================test5==========================================')
     test5 = pd.DataFrame({"key1" :['a','a','a','b','b','a'],
-                       "key2" : [1,1,2,1,2,1],
-                       'key3':[5,6,5,4,4,5],
+                       "key2" : [1,6,2,1,2,1],
+                       'key3':[5,6,7,4,9,5],
                        'key4':[30,40,50,60,70,80]})   
     print(test5)
-    
+    # this is test5
     #     key1  key2  key3  key4
     # 0    a     1     5    30
-    # 1    a     1     6    40
-    # 2    a     2     5    50
+    # 1    a     6     6    40
+    # 2    a     2     7    50
     # 3    b     1     4    60
-    # 4    b     2     4    70
+    # 4    b     2     9    70
     # 5    a     1     5    80
 
 
@@ -117,7 +117,17 @@ def main():
     print('=================Data Aggregation===========================================')
     
     print(test5["key2"].nsmallest(2))
+    print('this is test describe ====\n')
     print(test5.describe())
+    
+    test6 = test5.groupby('key1')
+    print('this is test6 ====\n',test6)
+    test7 = test6.agg(testFun)
+    print('this is test7 \n',test7)
+
+
+def testFun(arr):
+    return arr.max()-arr.min()
 
 if __name__ == '__main__':
     main()
