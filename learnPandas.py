@@ -100,13 +100,24 @@ def main():
                        'key3':[5,6,5,4,4,5],
                        'key4':[30,40,50,60,70,80]})   
     print(test5)
+    
+    #     key1  key2  key3  key4
+    # 0    a     1     5    30
+    # 1    a     1     6    40
+    # 2    a     2     5    50
+    # 3    b     1     4    60
+    # 4    b     2     4    70
+    # 5    a     1     5    80
+
 
     for k in test5.groupby(['key1','key2','key3']):
         print(k)
 
 
     print('=================Data Aggregation===========================================')
-
+    
+    print(test5["key2"].nsmallest(2))
+    print(test5.describe())
 
 if __name__ == '__main__':
     main()
