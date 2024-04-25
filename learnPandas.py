@@ -125,6 +125,27 @@ def main():
     test7 = test6.agg(testFun)
     print('this is test7 \n',test7)
 
+    print('==================10.5 Pivot Tables and Cross-Tabulation=====================')
+
+        #total_bill   tip  smoker  day    time  size   tip_pct
+    # 0       16.99  1.01     No  Sun  Dinner     2  0.059447
+    # 1       10.34  1.66     No  Sun  Dinner     3  0.160542
+    # 2       21.01  3.50     No  Sun  Dinner     3  0.166587
+    # 3       23.68  3.31     No  Sun  Dinner     2  0.139780
+    # 4       24.59  3.61     No  Sun  Dinner     4  0.146808
+
+    test8= pd.DataFrame({"total_bill" :[0,1,2,3,4],
+                       "tip" : [10,20,30,40,50],
+                       'smoker':['NO','NO','NO','NO','NO'],
+                       'day':['sun','sun','sun','sun','sun'],
+                       'time':['Dinner','Dinner','Dinner','Dinner','Dinner'],
+                       'size':[2,3,3,2,4],
+                       'tip_pct':[100,200,300,400,500]
+                       })   
+    print('this is test 8')
+    print(test8)
+    print('this is test8.pivottable')
+    print(test8.pivot_table(index=["day", "smoker"], values=["size", "tip", "tip_pct", "total_bill"]))
 
 def testFun(arr):
     return arr.max()-arr.min()
