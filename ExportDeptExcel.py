@@ -1,18 +1,40 @@
 import pandas as pd
 
-file_path = 'ITSM.xlsx'  # 替换为你的Excel文件路径  
-sheet_name = 'alldata'  # 替换为正确的工作表名  
+file_path = 'OA  发领导.xlsx'  # 替换为你的Excel文件路径  
+sheet_name = '5月份清单'  # 替换为正确的工作表名  
 df = pd.read_excel(file_path, sheet_name=sheet_name)  
 print(df)
 
-overall_avg_duration=df.groupby('流程')['AVG_TIME'].mean().reset_index(name='业务总体平均办理时长（天）')  
-print(overall_avg_duration)
-afterdf = pd.merge(df,overall_avg_duration,on='流程',how='left')
+print("###############################################")
 
-afterdf['差值']=afterdf['AVG_TIME']*24-afterdf['业务总体平均办理时长（天）']*24
-afterdf['AVG_TIME']=afterdf['AVG_TIME']*24
-afterdf['业务总体平均办理时长（天）']=afterdf['业务总体平均办理时长（天）']*24
+print(df[df['是否待阅']=='待办'])
 
-afterdf = afterdf.rename(columns={'USER':'用户','FLOWNAME':'流程名称','DUR_DATE':'办理时长（小时）','业务总体平均办理时长（天）':'平均用时'})
-output_file_path = 'j02.xlsx'  # 输出文件的路径  
-afterdf.to_excel(output_file_path, index=True)
+daibanDF = df[df['是否待阅']=='待办']
+daiyueDF = df[df['是否待阅']=='待阅']
+
+
+print("&&&&&&&&&&&&&&&&&&&")
+bumendf = df[['办理用户','办理部门']].drop_duplicates() 
+print(bumendf)
+print("&&&&&&&&&&&&&&&&&&&")
+zongshichangdf =  daibanDF.groupby('办理用户')['计算小时'].sum().reset_index(name='总待办时长')
+daibanshuliang  = daibanDF.groupby('办理用户')['计算小时'].count().reset_index(name='总待办数')
+
+
+zongdaiyuedf =  daiyueDF.groupby('办理用户')['计算小时'].sum().reset_index(name='总待阅时长')
+daiyueshuliang  = daiyueDF.groupby('办理用户')['计算小时'].count().reset_index(name='总待阅数量')
+
+afterdaibandf =  pd.merge(zongshichangdf,daibanshuliang,left_on='办理用户',right_on='办理用户')
+afterdaiyuedf = pd.merge(zongdaiyuedf,daiyueshuliang,left_on='办理用户',right_on='办理用户')
+
+t = pd.merge(afterdaibandf,afterdaiyuedf,left_on='办理用户',right_on='办理用户')
+
+afteralldf = pd.merge(t,bumendf,left_on='办理用户',right_on='办理用户')
+print(afteralldf)
+output_file_path = 'j06.xlsx'  # 输出文件的路径  
+afteralldf.groupby('办理用户').sum().to_excel(output_file_path, index=True)
+
+
+
+
+print('test')
